@@ -1,7 +1,9 @@
 version: '3.8'
 services:
   backend:
-    build: ./docker/backend
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
     container_name: kit-starter-headless-lamp-docker_backend
     restart: always
     ports:
@@ -17,7 +19,9 @@ services:
       - network
 
   mysql:
-    build: ./docker/mysql
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
     container_name: kit-starter-headless-lamp-docker_mysql
     restart: always
     ports:
@@ -52,14 +56,14 @@ services:
       - network
 
   frontend:
-    image: node:16
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
     container_name: kit-starter-headless-lamp-docker_frontend
     volumes:
       - ./frontend:/app
-    working_dir: /app
     ports:
       - "8081:8080"
-    command: sh -c "npm install && npm run serve"
     networks:
       - network
 
