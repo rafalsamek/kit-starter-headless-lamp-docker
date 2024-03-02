@@ -62,6 +62,7 @@ services:
     container_name: kit-starter-headless-lamp-docker_frontend
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     ports:
       - "8081:8080"
     networks:
